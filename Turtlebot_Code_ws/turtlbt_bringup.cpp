@@ -1,0 +1,46 @@
+<launch>
+ <!-- Make sure we can move the robot by simply publishing to the /cmd_vel topic -->
+ <remap from="mobile_base/commands/velocity" to="cmd_vel" />
+ <!-- Edit and uncomment these parameters after calibration -->
+ <param name="turtlebot_node/gyro_scale_correction" value="1.0"/>
+ <param name="turtlebot_node/odom_angular_scale_correction" value="1.0"/>
+ <param name="turtlebot_node/odom_linear_scale_correction" value="1.0"/>
+ <arg name="base" value="$(optenv TURTLEBOT_BASE kobuki)"/> <!-- create,
+rhoomba -->
+ <arg name="battery" default="$(optenv TURTLEBOT_BATTERY
+/proc/acpi/battery/BAT0)"/> <!-- /proc/acpi/battery/BAT0 -->
+ <arg name="stacks" default="$(optenv TURTLEBOT_STACKS circles)"/> <!--
+circles, hexagons -->
+ <arg name="3d_sensor" default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>
+<!-- kinect, asus_xtion_pro -->
+ <arg name="simulation" default="$(optenv TURTLEBOT_SIMULATION false)"/>
+
+ <param name="/use_sim_time" value="$(arg simulation)"/>
+
+ <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find
+rbx1_description)/urdf/turtlebot.urdf.xacro'" />
+ <param name="robot_description" command="$(arg urdf_file)" />
+ <!-- important generally, but specifically utilised by the current app manager --> 
+43
+ <param name="robot/name" value="$(optenv ROBOT turtlebot)"/>
+ <param name="robot/type" value="turtlebot"/>
+
+ <node pkg="robot_state_publisher" type="robot_state_publisher"
+name="robot_state_publisher">
+ <param name="publish_frequency" type="double" value="10.0" />
+ </node>
+ <node pkg="diagnostic_aggregator" type="aggregator_node"
+name="diagnostic_aggregator" >
+ <rosparam command="load" file="$(find turtlebot_bringup)/param/$(arg
+base)/diagnostics.yaml" />
+ </node>
+
+ <include file="$(find turtlebot_bringup)/launch/includes/_zeroconf.launch"/>
+ <include file="$(find turtlebot_bringup)/launch/includes/_mobile_base.launch">
+ <arg name="base" default="$(arg base)" />
+ </include>
+ <include file="$(find turtlebot_bringup)/launch/includes/_netbook.launch">
+ <arg name="battery" default="$(arg battery)" />
+ </include>
+ <include file="$(find turtlebot_bringup)/launch/includes/_app_manager.launch"/>
+</launch>

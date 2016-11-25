@@ -1,0 +1,2 @@
+beginner_tutorials
+-DCATKIN_DEVEL_PREFIX=/home/turtlebot-b213/Turtlebot_Code_ws/devel -DCMAKE_INSTALL_PREFIX=/home/turtlebot-b213/Turtlebot_Code_ws/install -G Unix Makefiles
