@@ -1,8 +1,0 @@
-prefix=/home/turtlebot-b213/Turtlebot_Code_ws/install
-
-Name: beginner_tutorials
-Description: Description of beginner_tutorials
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/turtlebot-b213/Turtlebot_Code_ws/install/lib 
-Requires: 
