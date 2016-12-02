@@ -41,7 +41,7 @@ public:
         continue;
       }
 
-      base_cmd.linear.x = base_cmd.linear.y = base_cmd.angular.z = 0;   
+      base_cmd.linear.x = base_cmd.linear.y = base_cmd.angular.z = 0;
       //move forward
       if(cmd[0]=='w'){
         base_cmd.linear.x = 1.5;
