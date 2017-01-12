@@ -2,6 +2,7 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 
+using namespace std;
 
 int main(int argc, char **argv)
 {
@@ -12,7 +13,7 @@ ros::Rate rate(10);
 
 while (ros::ok())
  {
-    std::cout << "Type a command and then press enter.  "
+    cout << "Type a command and then press enter.  "
       "Use 'w' to move forward, 's' to move backward, 'q' to turn forward-left, "
       "'e' to turn forward-right, 'd' to move backwards-left, 'a' to move backwards-right, '.' to exit.\n";
 
@@ -22,10 +23,10 @@ while (ros::ok())
     char cmd[50];
     while(ros::ok()){
 
-      std::cin.getline(cmd, 50);
+      cin.getline(cmd, 50);
       if(cmd[0]!='w' && cmd[0]!='s' && cmd[0]!='a' && cmd[0]!='d' && cmd[0]!='q' && cmd[0]!='e' && cmd[0]!='.')
       {
-        std::cout << "unknown command:" << cmd << "\n";
+        cout << "unknown command:" << cmd << "\n";
         continue;
       }
 
